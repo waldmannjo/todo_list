@@ -1,21 +1,25 @@
-const addToDoButton = document.getElementById('addToDo');
-
+const addTodoButton = document.querySelector('button.addTodoButton');
+const addTodoInput = document.querySelector('input.addTodoInput');
+const ul = document.querySelector("ul.todoList");
 //Add new item to Todo List
-addToDoButton.addEventListener('click', () => {
-  if (newToDo.value !== "") {
-    const newListElement = document.createElement('LI');
-    //add checkbox
-    const newCheckbox = document.createElement('input');
-    newCheckbox.type = 'checkbox';
-    newCheckbox.id = document.querySelector('input').value;
-    newListElement.appendChild(newCheckbox);
-    //add new item
-    const newToDo = document.createTextNode(document.querySelector('input').value);
-    newListElement.id = document.querySelector('input').value;
-
-    newListElement.appendChild(newToDo);
-    document.getElementById("todoList").appendChild(newListElement);
+addTodoButton.addEventListener('click', () => {
+  if (addTodoInput.value !== "") {
+    let li = document.createElement('li');
+    li.innerHTML = `<input type='checkbox'> ${addTodoInput.value}`;
+    ul.appendChild(li);
     //clear input
-    document.getElementById('newToDo').value = '';
+    addTodoInput.value = '';
   }
+});
+
+ul.addEventListener('change', (e) => {
+  let checkbox = e.target;
+  let li = checkbox.parentNode;
+  if (checkbox.checked) {
+    li.style.textDecoration = "line-through";
+  } else {
+    li.style.textDecoration = "none";
+  }
+  //li.removeChild(checkbox);
+  //ul.removeChild(li);
 });
